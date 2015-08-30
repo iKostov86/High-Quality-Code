@@ -10,6 +10,11 @@
 
     public static class StringExtensions
     {
+        /// <summary>
+        /// This method compute the hash by input string and convert it to hexadecimal string.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>String</returns>
         public static string ToMd5Hash(this string input)
         {
             var md5Hash = MD5.Create();
@@ -32,12 +37,22 @@
             return builder.ToString();
         }
 
+        /// <summary>
+        /// This method return boolean representation of input (as a true-like or false-like).
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>Boolean</returns>
         public static bool ToBoolean(this string input)
         {
             var stringTrueValues = new[] { "true", "ok", "yes", "1", "да" };
             return stringTrueValues.Contains(input.ToLower());
         }
 
+        /// <summary>
+        /// This method parse string into a short integer if is possible.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>Short</returns>
         public static short ToShort(this string input)
         {
             short shortValue;
@@ -85,11 +100,13 @@
                 return string.Empty;
             }
 
-            var startPosition = input.IndexOf(startString, startFrom, StringComparison.Ordinal) + startString.Length;
+            var startPosition = input.IndexOf(startString, startFrom, StringComparison.Ordinal);
             if (startPosition == -1)
             {
                 return string.Empty;
             }
+
+            startPosition += startString.Length;
 
             var endPosition = input.IndexOf(endString, startPosition, StringComparison.Ordinal);
             if (endPosition == -1)
